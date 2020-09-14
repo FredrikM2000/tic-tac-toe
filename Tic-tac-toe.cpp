@@ -27,19 +27,53 @@ int main() {
         std::cin >> p1;
         int choice = p1 - 1;
 
-        if (position[choice] == 'X' || position[choice] == 'O') {
+        if (position[choice] == 'X' || position[choice] == 'O') {//checks if the spot is already taken
             std::cout << "Already taken" << std::endl;;
         } else {
             position[choice] = 'X';
         }
-        for (int i = 0; i <= 7; i++) {
-            for (int j = 1; j <= 4; j++) {
-                if (position[i] == 'X' && position[i + j] == 'X' && position[i + j + j] == 'X') {
-                    win = true;
-                }
-            }    
+
+        switch (choice) {
+            case (0):
+
         }
-    } while (win != true);
+        
+        //for (int i = 0; i <= 6; i++) {
+        //    int j;
+        //    if (i % 3 == 0) {
+        //        j = 1;
+        //        if (position[i] == 'X' && position[i + j] == 'X' && position[i + j + j] == 'X') {
+        //            win = true;
+        //        }
+        //        if (i == 0) {
+        //            j = 4;
+        //            if (position[i] == 'X' && position[i + j] == 'X' && position[i + j + j] == 'X') {
+        //                win = true;
+        //            }
+        //        }
+        //    }
+        //    if (i <= 2) {
+        //        j = 3;
+        //        if (position[i] == 'X' && position[i + j] == 'X' && position[i + j + j] == 'X') {
+        //            win = true;
+        //        }
+        //        if (i == 2) {
+        //            j = 2;
+        //                if (position[i] == 'X' && position[i + j] == 'X' && position[i + j + j] == 'X') {
+        //                    win = true;
+        //                }
+
+        //        }
+        //    }
+        //
+
+        //  /*  for (int j = 1; j <= 4; j++) {
+        //        if (position[i] == 'X' && position[i + j] == 'X' && position[i + j + j] == 'X') {
+        //            win = true;
+        //        }
+        //    } */   
+        //}
+    }while (win != true);
     table();
     std::cout << "Player 1 wins!";
 }
