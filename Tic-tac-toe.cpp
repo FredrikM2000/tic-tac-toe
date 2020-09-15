@@ -3,6 +3,7 @@
 char position[10] = {'1', '2', '3', '4', '5', '6', '7', '8', '9'};
 bool win = false;
 int currentPlayer = 1;
+int a = 0;
 void table() {
         std::cout << "\n  |  " << position[0] << "  ";
         std::cout << "|  " << position[1] << "  ";
@@ -39,6 +40,7 @@ void check2(char z) {
 void test(char brick) {
     bool valid_input = false;
     int player;
+
     table();
     do {
         std::cout << "Player " << currentPlayer << ", write a number between 1 or 9 : ";
@@ -50,6 +52,7 @@ void test(char brick) {
         }
         else {
             position[choice] = brick;
+            a++;//counter to see if its a draw
             valid_input = true;
         }
     } while (valid_input == false);
@@ -60,7 +63,8 @@ void test(char brick) {
 //************************REMEMBER TO COMMENT TO EXPLAIN ALL THIS SHIT*****************
 /*things you could do:
 -color the X an O red
-
+-ability to replay
+-ability to choose level
 
 
 */ 
@@ -69,7 +73,6 @@ int main() {
     std::cout << "\t******* Welcome to Tic Tac Toe! *******\n";
 
     
-
     bool valid_selection = true;
     do {
         int selection;
@@ -81,6 +84,7 @@ int main() {
         if (selection == 1) {
             valid_selection = true;
             bool player1_turn = true;
+            bool draw = false;
             do {
                 int X[10] = {};
 
@@ -92,6 +96,12 @@ int main() {
                     test('O');
                     check2('O');
                 }
+
+                
+                if (a == 9) {
+                    draw = true;
+                }
+
                 switch (player1_turn) {
                 case true:
                     player1_turn = false;
@@ -101,14 +111,19 @@ int main() {
                     player1_turn = true;
                     currentPlayer = 1;
                 }
-            } while (win != true);
+            } while (win != true && draw != true);
 
             table();
-            if (player1_turn == false) {
-                std::cout << "Player 1 wins!";
+            if (draw == true) {
+                std::cout << "Congratulations, you are equally bad";
             }
             else {
-                std::cout << "Player 2 wins!";
+                if (player1_turn == false) {
+                    std::cout << "Player 1 wins!";
+                }
+                else {
+                    std::cout << "Player 2 wins!";
+                }
             }
         }
         else if (selection == 2) {
@@ -134,13 +149,14 @@ int main() {
 
 
 
-
-        } else {
-            std::cout << "Invalid option, try again";
-            valid_selection = false;
-        }
+            table();
+            } else {
+                 std::cout << "Invalid option, try again";
+                 valid_selection = false;
+            }
+            
     }while (valid_selection == false);
-    table();
+    
 }
 
 
