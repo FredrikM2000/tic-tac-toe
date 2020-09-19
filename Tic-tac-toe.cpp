@@ -1,6 +1,9 @@
 #include <iostream>
 
+
 char position[10] = {'1', '2', '3', '4', '5', '6', '7', '8', '9'};
+
+
 bool win = false;
 int currentPlayer = 1;
 int a = 0;
@@ -53,6 +56,7 @@ void test(char brick) {
         else {
             position[choice] = brick;
             a++;//counter to see if its a draw
+            //available_position[choice].remove
             valid_input = true;
         }
     } while (valid_input == false);
@@ -128,12 +132,41 @@ int main() {
         }
         else if (selection == 2) {
             valid_selection = true;
+            
+            
+
+            //std::cout << available_position[0];
 
             int r = 0;
             do {
                 test('X');
                 check2('X');
+                //available spots = positions
 
+
+                //for (int q = 0;q <= 9;q++) {
+                //    if (position[q] == 'X' || position[q] == 'O') {
+                //    }
+                //    else {
+                //        available_position.erase(available_position.begin() + q);
+                //        std::cout << available_position[q];
+                //    }
+                //}
+
+                /*available spot.random = 'O'*/
+
+
+                int placement;// = random
+                //while nothing is placed
+                //if already placement already taken nothing happens, if not place
+
+                if (position[placement] == 'X' || position[placement] == 'O') {//checks if the spot is already taken
+                }
+                else {
+                    position[placement] = 'O';
+                    a++;//counter to see if its a draw
+                    //available_position[choice].remove
+                }
 
 
 
@@ -141,15 +174,23 @@ int main() {
 
 
                 position[r] = 'O';
+
+                check2('O');
+
+
+
                 r++;
             } while (win != true);
 
-
-
-
-
-
             table();
+
+            std::cout << "You win!";
+
+
+
+
+
+            
             } else {
                  std::cout << "Invalid option, try again";
                  valid_selection = false;
