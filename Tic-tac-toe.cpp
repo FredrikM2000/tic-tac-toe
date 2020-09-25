@@ -1,4 +1,5 @@
 #include <iostream>
+#include <ctime>
 
 
 char position[10] = {'1', '2', '3', '4', '5', '6', '7', '8', '9'};
@@ -85,7 +86,7 @@ int main() {
         std::cout << "Play against AI(2)\n";
         std::cin >> selection;
 
-        if (selection == 1) {
+        if (selection == 1) { //Play 1v1
             valid_selection = true;
             bool player1_turn = true;
             bool draw = false;
@@ -129,21 +130,26 @@ int main() {
                     std::cout << "Player 2 wins!";
                 }
             }
-        }
-        else if (selection == 2) {
+        } 
+
+
+        else if (selection == 2) { //Play against AI
             valid_selection = true;
-            
-            
+            bool draw = false;
+            bool player1turn = true;
 
             //std::cout << available_position[0];
 
-            int r = 0;
+            //int r = 0;
             do {
+                player1turn = true;
+                draw = false;
                 test('X');
                 check2('X');
+                
                 //available spots = positions
 
-
+                
                 //for (int q = 0;q <= 9;q++) {
                 //    if (position[q] == 'X' || position[q] == 'O') {
                 //    }
@@ -154,41 +160,60 @@ int main() {
                 //}
 
                 /*available spot.random = 'O'*/
-
-
-                int placement;// = random
                 //while nothing is placed
                 //if already placement already taken nothing happens, if not place
 
-                if (position[placement] == 'X' || position[placement] == 'O') {//checks if the spot is already taken
-                }
-                else {
-                    position[placement] = 'O';
-                    a++;//counter to see if its a draw
-                    //available_position[choice].remove
+                if (a == 9) {
+                    draw = true;
                 }
 
 
+                if (win != true && draw != true) {
+                    std::cout << "hey";
+                    player1turn = false;
+                    bool placed = false;
+                    do {
+                        std::srand(static_cast<unsigned int>(std::time(nullptr)));
+                        int placement = rand() % 8 + 1;// = random
 
+                        std::cout << placement;
+                        if (position[placement] == 'X' || position[placement] == 'O') {//checks if the spot is already taken
+                        }
+                        else {
+                            position[placement] = 'O';
+                            a++;//counter to see if its a draw
+                            //available_position[choice].remove
+                            placed = true;
+                        }
+                    } while (placed == false);
 
+                    // position[r] = 'O';
 
+                    check2('O');
+                }
+                if (draw == true && win == true) {
+                    draw = false;
+                }
 
-                position[r] = 'O';
-
-                check2('O');
-
-
-
-                r++;
-            } while (win != true);
+               //r++;
+            } while (win != true && draw != true);
 
             table();
 
-            std::cout << "You win!";
+            std::cout << player1turn;
 
+            if (win == true) {
+                if (player1turn == true) {
+                    std::cout << "Congratulations, you won against the AI!";
+                }
+                else {
+                    std::cout << "You lost against the AI";
+                }
+            }
 
-
-
+            if (draw == true) {
+                std::cout << "You drew with the AI";
+            }
 
             
             } else {
