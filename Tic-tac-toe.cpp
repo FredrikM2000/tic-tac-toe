@@ -1,9 +1,7 @@
 #include <iostream>
 #include <ctime>
 
-
 char position[10] = {'1', '2', '3', '4', '5', '6', '7', '8', '9'};
-
 
 bool win = false;
 int currentPlayer = 1;
@@ -20,12 +18,12 @@ void table() {
         std::cout << "|  " << position[8] << "  |\n";
         std::endl(std::cout);
 }
-void check1(int i, int j, char z) {
+void check1(int i, int j, char z) {//CHANGE
     if (position[i] == z && position[i + j] == z && position[i + j + j] == z) {
         win = true;
     }
 }
-void check2(char z) {
+void check2(char z) {//CHANGE
     for (int n = 0; n <= 6;n++) {
         if (n % 3 == 0) {
             check1(n, 1, z);
@@ -41,7 +39,7 @@ void check2(char z) {
         }
     }
 }
-void test(char brick) {
+void test(char brick) {//CHANGE
     bool valid_input = false;
     int player;
 
@@ -57,27 +55,20 @@ void test(char brick) {
         else {
             position[choice] = brick;
             a++;//counter to see if its a draw
-            //available_position[choice].remove
             valid_input = true;
         }
     } while (valid_input == false);
 }
 
-
-
 //************************REMEMBER TO COMMENT TO EXPLAIN ALL THIS SHIT*****************
 /*things you could do:
--color the X an O red
+-color the X and O red
 -ability to replay
 -ability to choose level
-
-
 */ 
 int main() {
-
     std::cout << "\t******* Welcome to Tic Tac Toe! *******\n";
 
-    
     bool valid_selection = true;
     do {
         int selection;
@@ -91,8 +82,6 @@ int main() {
             bool player1_turn = true;
             bool draw = false;
             do {
-                int X[10] = {};
-
                 if (player1_turn == true) {
                     test('X');
                     check2('X');
@@ -102,7 +91,6 @@ int main() {
                     check2('O');
                 }
 
-                
                 if (a == 9) {
                     draw = true;
                 }
@@ -116,7 +104,7 @@ int main() {
                     player1_turn = true;
                     currentPlayer = 1;
                 }
-            } while (win != true && draw != true);
+            } while (win == false && draw == false);
 
             table();
             if (draw == true) {
@@ -138,30 +126,12 @@ int main() {
             bool draw = false;
             bool player1turn = true;
 
-            //std::cout << available_position[0];
-
-            //int r = 0;
             do {
                 player1turn = true;
                 draw = false;
                 test('X');
                 check2('X');
-                
-                //available spots = positions
 
-                
-                //for (int q = 0;q <= 9;q++) {
-                //    if (position[q] == 'X' || position[q] == 'O') {
-                //    }
-                //    else {
-                //        available_position.erase(available_position.begin() + q);
-                //        std::cout << available_position[q];
-                //    }
-                //}
-
-                /*available spot.random = 'O'*/
-                //while nothing is placed
-                //if already placement already taken nothing happens, if not place
 
                 if (a == 9) {
                     draw = true;
@@ -169,38 +139,30 @@ int main() {
 
 
                 if (win != true && draw != true) {
-                    std::cout << "hey";
                     player1turn = false;
                     bool placed = false;
-                    do {
+                    do {// The AI places an O at a random available position
                         std::srand(static_cast<unsigned int>(std::time(nullptr)));
-                        int placement = rand() % 8 + 1;// = random
+                        int placement = rand() % 8 + 1;
 
-                        std::cout << placement;
                         if (position[placement] == 'X' || position[placement] == 'O') {//checks if the spot is already taken
                         }
                         else {
                             position[placement] = 'O';
                             a++;//counter to see if its a draw
-                            //available_position[choice].remove
                             placed = true;
                         }
                     } while (placed == false);
 
-                    // position[r] = 'O';
-
                     check2('O');
                 }
-                if (draw == true && win == true) {
+                if (draw == true && win == true) {//Makes sure that if the player wins with the last placement it doesn't come out as a draw
                     draw = false;
                 }
 
-               //r++;
             } while (win != true && draw != true);
 
             table();
-
-            std::cout << player1turn;
 
             if (win == true) {
                 if (player1turn == true) {
@@ -215,11 +177,10 @@ int main() {
                 std::cout << "You drew with the AI";
             }
 
-            
-            } else {
+        } else {
                  std::cout << "Invalid option, try again";
                  valid_selection = false;
-            }
+        }
             
     }while (valid_selection == false);
     
